@@ -1,6 +1,5 @@
 import 'package:education_app/util/adapt_util.dart';
 import 'package:education_app/widget/home_bar.dart';
-import 'package:education_app/widget/select_grade.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -42,8 +41,8 @@ class HomePage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(Adapt.px(16),
           MediaQuery.of(context).padding.top + Adapt.px(35), Adapt.px(16), 0),
-      width: Adapt.px(343),
-      height: Adapt.px(155),
+      // width: Adapt.px(343),
+      // height: Adapt.px(155),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
@@ -78,6 +77,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                     child: GestureDetector(
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                         height: Adapt.px(91),
                       ),
                     ),
-                    margin: EdgeInsets.fromLTRB(0, Adapt.px(11), 0, 0),
+                    margin: EdgeInsets.only(top: Adapt.px(11)),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       boxShadow: [
@@ -110,8 +110,7 @@ class HomePage extends StatelessWidget {
                         height: Adapt.px(91),
                       ),
                     ),
-                    margin: EdgeInsets.fromLTRB(
-                        Adapt.px(24), Adapt.px(11), Adapt.px(24), 0),
+                    margin: EdgeInsets.only(top: Adapt.px(11)),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       boxShadow: [
@@ -133,7 +132,7 @@ class HomePage extends StatelessWidget {
                         height: Adapt.px(91),
                       ),
                     ),
-                    margin: EdgeInsets.fromLTRB(0, Adapt.px(11), 0, 0),
+                    margin: EdgeInsets.only(top: Adapt.px(11)),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       boxShadow: [
@@ -190,33 +189,39 @@ class HomePage extends StatelessWidget {
                         width: double.infinity,
                       ),
                     ),
-                    Container(
-                      height: Adapt.px(89),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Stack(
-                                children: <Widget>[],
-                              ),
-                              Container(
-                                child: Text('已服务超21.2万同学'),
-                              ),
-                              Container(
-                                child: Text('名额仅剩'),
-                              ),
-                              Stack(
-                                children: <Widget>[],
-                              ),
-                              Container(
-                                child: Text('位'),
-                              ),
-                            ],
-                          ),
-                          Container()
-                        ],
+                    Expanded(
+                      child: Container(
+                        // height: Adapt.px(89),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                    // child: Stack(
+                                    //   children: <Widget>[],
+                                    // ),
+                                    ),
+                                Container(
+                                  child: Text('已服务超21.2万同学'),
+                                ),
+                                Container(
+                                  child: Text('名额仅剩'),
+                                ),
+                                Container(
+                                    // child: Stack(
+                                    //   children: <Widget>[],
+                                    // ),
+                                    ),
+                                Container(
+                                  child: Text('位'),
+                                ),
+                              ],
+                            ),
+                            Container()
+                          ],
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

@@ -16,41 +16,43 @@ class HomeBar extends StatelessWidget {
       child: Row(
         children: <Widget>[
           SelectGrade(),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              margin: EdgeInsets.only(left: Adapt.px(14)),
-              padding: EdgeInsets.fromLTRB(Adapt.px(4), 0, Adapt.px(4), 0),
-              height: Adapt.px(28),
-              width: Adapt.px(244),
-              decoration: BoxDecoration(
-                color: Color(0x9C69CFFD),
-                borderRadius: BorderRadius.circular(
-                  Adapt.px(14),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {},
+              child: Container(
+                alignment: Alignment.centerRight,
+                margin: EdgeInsets.only(left: Adapt.px(14)),
+                padding: EdgeInsets.fromLTRB(Adapt.px(4), 0, Adapt.px(4), 0),
+                height: Adapt.px(28),
+                decoration: BoxDecoration(
+                  color: Color(0x9C69CFFD),
+                  borderRadius: BorderRadius.circular(
+                    Adapt.px(14),
+                  ),
                 ),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.search,
-                    color: Colors.white,
-                    size: Adapt.px(24),
-                  ),
-                  Expanded(
-                    child: Text(
-                      '四年级学霸养成营课程',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Adapt.px(12),
-                          fontWeight: FontWeight.bold),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: Adapt.px(24),
                     ),
-                  ),
-                  Icon(
-                    Icons.mic,
-                    color: Colors.white,
-                    size: Adapt.px(24),
-                  ),
-                ],
+                    Expanded(
+                      child: Text(
+                        '四年级学霸养成营课程',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Adapt.px(12),
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Icon(
+                      Icons.mic,
+                      color: Colors.white,
+                      size: Adapt.px(24),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
