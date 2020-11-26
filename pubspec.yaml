@@ -50,7 +50,11 @@ flutter:
      - assets/images/guide_bg_1.png
      - assets/images/guide_bg_2.png
      - assets/images/guide_bg_3.png
-     - assets/images/read_book_icon.png
+     - assets/images/head_icon.png
+     - assets/images/chinese.png
+     - assets/images/math.png
+     - assets/images/english.png
+     - assets/images/swiper_promote.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
