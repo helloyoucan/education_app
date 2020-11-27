@@ -55,6 +55,14 @@ flutter:
      - assets/images/math.png
      - assets/images/english.png
      - assets/images/swiper_promote.png
+     - assets/images/util_nav/util_nav_1.png
+     - assets/images/util_nav/util_nav_2.png
+     - assets/images/util_nav/util_nav_3.png
+     - assets/images/util_nav/util_nav_4.png
+     - assets/images/util_nav/util_nav_5.png
+     - assets/images/util_nav/util_nav_6.png
+     - assets/images/util_nav/util_nav_7.png
+     - assets/images/util_nav/util_nav_8.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
