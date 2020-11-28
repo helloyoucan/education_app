@@ -1,6 +1,7 @@
 import 'package:education_app/dao/ExtracurricularStudyDao.dart';
 import 'package:education_app/model/extracurricular_study_model.dart';
 import 'package:education_app/util/adapt_util.dart';
+import 'package:education_app/widget/tag.dart';
 import 'package:flutter/material.dart';
 
 class ExtracurricularStudyList extends StatefulWidget {
@@ -80,9 +81,9 @@ class _ExtracurricularStudyListState extends State<ExtracurricularStudyList> {
             clipBehavior: Clip.antiAlias,
             borderRadius: BorderRadius.circular(Adapt.px(6)),
             child: Image.network(
-              'https://via.placeholder.com/' +
+              'http://placekitten.com/' +
                   Adapt.px(100).toInt().toString() +
-                  'x' +
+                  '/' +
                   Adapt.px(120).toInt().toString() +
                   '?text=' +
                   item.bookName,
@@ -235,29 +236,10 @@ class _ExtracurricularStudyListState extends State<ExtracurricularStudyList> {
           currentGategory = gategoryText;
         });
       },
-      child: Container(
+      child: Tag(
+        text: gategoryText,
+        isActive: currentGategory == gategoryText,
         margin: EdgeInsets.fromLTRB(0, 0, 0, Adapt.px(10)),
-        decoration: BoxDecoration(
-          color: currentGategory == gategoryText ? Colors.blue : Colors.white,
-          border: Border.all(
-              color:
-                  currentGategory == gategoryText ? Colors.blue : Colors.grey,
-              width: 1),
-          borderRadius: BorderRadius.all(Radius.circular(Adapt.px(14))),
-        ),
-        height: Adapt.px(26),
-        width: Adapt.px(72),
-        alignment: Alignment.center,
-        child: Text(
-          gategoryText,
-          style: TextStyle(
-            fontSize: Adapt.px(12),
-            fontWeight: currentGategory == gategoryText
-                ? FontWeight.bold
-                : FontWeight.normal,
-            color: currentGategory == gategoryText ? Colors.white : Colors.grey,
-          ),
-        ),
       ),
     );
   }

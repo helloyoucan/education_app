@@ -1,4 +1,5 @@
 import 'package:education_app/util/adapt_util.dart';
+import 'package:education_app/widget/tag.dart';
 import 'package:flutter/material.dart';
 
 class SelectGrade extends StatefulWidget {
@@ -168,29 +169,11 @@ class _SelectGradeState extends State<SelectGrade> {
         });
         Navigator.of(context).pop();
       },
-      child: Container(
+      child: Tag(
+        text: gradeText,
+        isActive: currentSelect == gradeText,
         margin:
             EdgeInsets.fromLTRB(Adapt.px(13), 0, Adapt.px(13), Adapt.px(13)),
-        decoration: BoxDecoration(
-          color: currentSelect == gradeText ? Colors.blue : Colors.white,
-          border: Border.all(
-              color: currentSelect == gradeText ? Colors.blue : Colors.grey,
-              width: 1),
-          borderRadius: BorderRadius.all(Radius.circular(Adapt.px(14))),
-        ),
-        height: Adapt.px(26),
-        width: Adapt.px(72),
-        alignment: Alignment.center,
-        child: Text(
-          gradeText,
-          style: TextStyle(
-            fontSize: Adapt.px(12),
-            fontWeight: currentSelect == gradeText
-                ? FontWeight.bold
-                : FontWeight.normal,
-            color: currentSelect == gradeText ? Colors.white : Colors.grey,
-          ),
-        ),
       ),
     );
   }

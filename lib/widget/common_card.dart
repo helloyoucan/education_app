@@ -35,7 +35,7 @@ class CommonCard extends StatelessWidget {
         ),
         color: Colors.white,
         border: Border.all(
-          width: 1,
+          width: hasBorder ? 1 : 0,
           color: hasBorder ? Color(0xFFEBEBEB) : Colors.white,
         ),
       ),

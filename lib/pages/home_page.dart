@@ -3,7 +3,6 @@ import 'package:education_app/widget/common_card.dart';
 import 'package:education_app/widget/extracurricular_study_list.dart';
 import 'package:education_app/widget/home_bar.dart';
 import 'package:education_app/widget/home_countdown.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -22,6 +21,7 @@ class HomePage extends StatelessWidget {
 
   Widget _listView(BuildContext context) {
     return ListView(
+      scrollDirection: Axis.vertical,
       children: <Widget>[
         Stack(children: <Widget>[
           Container(
@@ -36,7 +36,16 @@ class HomePage extends StatelessWidget {
         extracurricularStudy,
         projectActivity,
         Container(
-          height: 1000,
+          alignment: Alignment.center,
+          height: Adapt.px(52),
+          padding: EdgeInsets.only(bottom: Adapt.px(13)),
+          child: Text(
+            '哎呀，到底啦~ ',
+            style: TextStyle(
+              color: Color(0xFFD2D2D2),
+              fontSize: Adapt.px(12),
+            ),
+          ),
         )
       ],
     );
@@ -63,15 +72,38 @@ class HomePage extends StatelessWidget {
           //   left: Adapt.px(15),
           //   right: Adapt.px(15),
           // ),
-          child: projectActivityCard(),
+          height: Adapt.px(212),
+          // constraints: BoxConstraints(
+          //   minHeight: Adapt.px(220),
+          // ),
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              projectActivityCard(title: '秀出你的作文，一起参与活动赢文具相机呀', isFirst: true),
+              projectActivityCard(title: '小学宝线下积木PK大赛正式开始，快来一起玩吧'),
+              projectActivityCard(title: '暑假已到，跟同学们一起逛馆，你还等什么', isLast: true),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget projectActivityCard() {
+  Widget projectActivityCard(
+      {String title, bool isFirst = false, bool isLast = false}) {
     return Container(
+      width: Adapt.px(200),
+      height: Adapt.px(186),
+      margin: EdgeInsets.only(
+        bottom: Adapt.px(16),
+        left: Adapt.px(isFirst ? 16 : 11),
+        right: Adapt.px(isLast ? 16 : 0),
+      ),
       child: Card(
+        borderOnForeground: true,
+        margin: EdgeInsets.only(
+            // bottom: Adapt.px(16),
+            ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(
@@ -93,9 +125,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               child: Image.network(
-                'https://via.placeholder.com/' +
+                'http://placekitten.com/' +
                     Adapt.px(200).toInt().toString() +
-                    'x' +
+                    '/' +
                     Adapt.px(104).toInt().toString() +
                     '?text=',
                 width: Adapt.px(200),
@@ -103,20 +135,45 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Container(
-                // child: LimitedBox,
+              margin: EdgeInsets.all(Adapt.px(8)),
+              child: Text(
+                title,
+                softWrap: true,
+                maxLines: 2,
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: Adapt.px(14),
+                  fontWeight: FontWeight.bold,
                 ),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    '距活动结束',
-                    style: TextStyle(
-                      color: Color(0xFF666666),
-                      fontSize: Adapt.px(12),
-                      // fontWeight: FontWeight.bold,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.centerLeft,
+                margin: EdgeInsets.only(
+                  left: Adapt.px(8),
+                  bottom: Adapt.px(11),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      '距活动结束',
+                      style: TextStyle(
+                        color: Color(0xFF666666),
+                        fontSize: Adapt.px(12),
+                        // fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  )
-                ],
+                    Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(left: Adapt.px(23)),
+                      child: HomeCountdown(
+                        type: CountdownType.simple,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],
@@ -463,9 +520,12 @@ class HomePage extends StatelessWidget {
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(Adapt.px(13))),
                                 child: Image.network(
-                                  'https://via.placeholder.com/' +
-                                      Adapt.px(26).toString(),
+                                  'http://placekitten.com/' +
+                                      Adapt.px(26).toInt().toString() +
+                                      '/' +
+                                      Adapt.px(26).toInt().toString(),
                                   width: Adapt.px(26),
+                                  height: Adapt.px(26),
                                 ),
                               ),
                             ),
@@ -488,9 +548,12 @@ class HomePage extends StatelessWidget {
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(Adapt.px(13))),
                                 child: Image.network(
-                                  'https://via.placeholder.com/' +
-                                      Adapt.px(26).toString(),
+                                  'http://placekitten.com/' +
+                                      Adapt.px(26).toInt().toString() +
+                                      '/' +
+                                      Adapt.px(26).toInt().toString(),
                                   width: Adapt.px(26),
+                                  height: Adapt.px(26),
                                 ),
                               ),
                             ),
@@ -513,9 +576,12 @@ class HomePage extends StatelessWidget {
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(Adapt.px(13))),
                                 child: Image.network(
-                                  'https://via.placeholder.com/' +
-                                      Adapt.px(26).toString(),
+                                  'http://placekitten.com/' +
+                                      Adapt.px(26).toInt().toString() +
+                                      '/' +
+                                      Adapt.px(26).toInt().toString(),
                                   width: Adapt.px(26),
+                                  height: Adapt.px(26),
                                 ),
                               ),
                             ),
