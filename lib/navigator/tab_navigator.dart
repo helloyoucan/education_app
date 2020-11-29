@@ -1,3 +1,4 @@
+import 'package:education_app/pages/course_page.dart';
 import 'package:education_app/pages/home_page.dart';
 import 'package:education_app/util/iconFont.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,16 +9,19 @@ class TabNavigator extends StatefulWidget {
   _TabNavigator createState() => _TabNavigator();
 }
 
-class _TabNavigator extends State {
-  int _currentIndex = 0;
-  final PageController _controller = PageController(initialPage: 0);
+class _TabNavigator extends State<TabNavigator> {
+  int _currentIndex = 1;
+  final PageController _controller = PageController(initialPage: 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: _controller,
         physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[HomePage()],
+        children: <Widget>[
+          HomePage(),
+          CoursePage(),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 26,
@@ -25,6 +29,7 @@ class _TabNavigator extends State {
         selectedFontSize: 18,
         currentIndex: _currentIndex,
         onTap: (index) {
+          _controller.jumpToPage(index);
           setState(() {
             _currentIndex = index;
           });
