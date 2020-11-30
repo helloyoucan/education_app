@@ -3,6 +3,7 @@ import 'package:education_app/widget/common_card.dart';
 import 'package:education_app/widget/extracurricular_study_list.dart';
 import 'package:education_app/widget/home_bar.dart';
 import 'package:education_app/widget/home_countdown.dart';
+import 'package:education_app/widget/page_end.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -35,18 +36,7 @@ class HomePage extends StatelessWidget {
         _utilsNav,
         extracurricularStudy,
         projectActivity,
-        Container(
-          alignment: Alignment.center,
-          height: Adapt.px(52),
-          padding: EdgeInsets.only(bottom: Adapt.px(13)),
-          child: Text(
-            '哎呀，到底啦~ ',
-            style: TextStyle(
-              color: Color(0xFFD2D2D2),
-              fontSize: Adapt.px(12),
-            ),
-          ),
-        )
+        PageEnd()
       ],
     );
   }

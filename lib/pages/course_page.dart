@@ -3,6 +3,7 @@ import 'package:education_app/model/course_list_model.dart';
 import 'package:education_app/util/adapt_util.dart';
 import 'package:education_app/widget/common_card.dart';
 import 'package:education_app/widget/course_tag_list.dart';
+import 'package:education_app/widget/page_end.dart';
 import 'package:education_app/widget/select_grade.dart';
 import 'package:education_app/widget/tag.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,8 +21,6 @@ class _CoursePageState extends State<CoursePage> {
   void initState() {
     super.initState();
     CourseListDao.fetch().then((value) {
-      print('value');
-      print(value);
       _courseListModel = value;
     });
   }
@@ -40,6 +39,7 @@ class _CoursePageState extends State<CoursePage> {
             child: ListView(
               children: [
                 CourseTagList(),
+                _ad,
                 Column(
                   children: _courseListModel != null
                       ? _courseListModel.list.map((item) {
@@ -47,6 +47,8 @@ class _CoursePageState extends State<CoursePage> {
                         }).toList()
                       : [],
                 ),
+                _freeCourse,
+                PageEnd(),
               ],
             ),
           ),
@@ -56,7 +58,18 @@ class _CoursePageState extends State<CoursePage> {
     );
   }
 
-  /// 导航
+  Widget get _freeCourse {
+    return Container(
+      child: CommonCard(
+        title: '寒暑课',
+        subTitle: '轻松领跑新学期',
+        hasBorder: false,
+        child: Container(),
+      ),
+    );
+  }
+
+  /// 头部导航
   Widget _courseNav(BuildContext context) {
     double top = MediaQuery.of(context).padding.top;
     return Container(
@@ -114,11 +127,23 @@ class _CoursePageState extends State<CoursePage> {
     );
   }
 
+  Widget get _ad {
+    return Container(
+      padding: EdgeInsets.only(bottom: Adapt.px(3), top: Adapt.px(12)),
+      alignment: Alignment.center,
+      child: Image.asset(
+        'assets/images/course_ad.png',
+        height: Adapt.px(39),
+        width: Adapt.px(343),
+      ),
+    );
+  }
+
   Widget _courseCard(CourseItem item) {
     print(item.coverURL);
     return Container(
       margin: EdgeInsets.only(
-        bottom: Adapt.px(12),
+        top: Adapt.px(12),
       ),
       child: CommonCard(
         title: item.type,
@@ -163,34 +188,56 @@ class _CoursePageState extends State<CoursePage> {
                   ),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    item.description,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '难度: ' + item.difficulty,
+              Container(
+                margin: EdgeInsets.only(
+                  left: Adapt.px(13),
+                  top: Adapt.px(5),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: Adapt.px(0),
+                        bottom: Adapt.px(4),
+                      ),
+                      child: Text(
+                        item.name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          fontSize: Adapt.px(16),
                         ),
                       ),
-                      _starList(item.difficultyStar),
-                    ],
-                  ),
-                  _tagList(item.tags),
-                ],
+                    ),
+                    Text(
+                      item.description,
+                      style: TextStyle(
+                        fontSize: Adapt.px(12),
+                        // fontWeight: FontWeight.bold,
+                        color: Color(0xFF666666),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: Adapt.px(8),
+                        bottom: Adapt.px(16),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            '难度: ' + item.difficulty + '  ',
+                            style: TextStyle(
+                              fontSize: Adapt.px(12),
+                              color: Color(0xFF999999),
+                            ),
+                          ),
+                          _starList(item.difficultyStar),
+                        ],
+                      ),
+                    ),
+                    _tagList(item.tags),
+                  ],
+                ),
               )
             ],
           ),
@@ -206,6 +253,7 @@ class _CoursePageState extends State<CoursePage> {
         Icon(
           Icons.star,
           color: Color(0xFFFF632B),
+          size: Adapt.px(14),
         ),
       );
     }
@@ -213,12 +261,17 @@ class _CoursePageState extends State<CoursePage> {
       children: list,
     );
   }
-}
 
-Widget _tagList(List<String> tags) {
-  return Row(
-    children: tags.map((tag) {
-      return Tag(text: tag);
-    }).toList(),
-  );
+  Widget _tagList(List<String> tags) {
+    return Row(
+      children: tags.map((tag) {
+        return Tag(
+          text: tag,
+          margin: EdgeInsets.only(
+            right: Adapt.px(10),
+          ),
+        );
+      }).toList(),
+    );
+  }
 }
