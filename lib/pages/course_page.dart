@@ -21,7 +21,9 @@ class _CoursePageState extends State<CoursePage> {
   void initState() {
     super.initState();
     CourseListDao.fetch().then((value) {
-      _courseListModel = value;
+      setState(() {
+        _courseListModel = value;
+      });
     });
   }
 
@@ -30,27 +32,31 @@ class _CoursePageState extends State<CoursePage> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            padding: EdgeInsets.only(
-              top: Adapt.px(44),
-              left: Adapt.px(16),
-              right: Adapt.px(16),
-            ),
-            child: ListView(
-              children: [
-                CourseTagList(),
-                _ad,
-                Column(
-                  children: _courseListModel != null
-                      ? _courseListModel.list.map((item) {
-                          return _courseCard(item);
-                        }).toList()
-                      : [],
+          ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: Adapt.px(44),
+                  left: Adapt.px(16),
+                  right: Adapt.px(16),
                 ),
-                _freeCourse,
-                PageEnd(),
-              ],
-            ),
+                child: Column(
+                  children: [
+                    CourseTagList(),
+                    _ad,
+                    Column(
+                      children: _courseListModel != null
+                          ? _courseListModel.list.map((item) {
+                              return _courseCard(item);
+                            }).toList()
+                          : [],
+                    ),
+                  ],
+                ),
+              ),
+              _freeCourse,
+              PageEnd(),
+            ],
           ),
           _courseNav(context),
         ],
@@ -59,12 +65,105 @@ class _CoursePageState extends State<CoursePage> {
   }
 
   Widget get _freeCourse {
-    return Container(
+    return Padding(
+      padding: EdgeInsets.only(top: Adapt.px(20)),
       child: CommonCard(
         title: '寒暑课',
         subTitle: '轻松领跑新学期',
         hasBorder: false,
-        child: Container(),
+        color: Colors.transparent,
+        child: Container(
+          alignment: Alignment.center,
+          child: Wrap(
+            runSpacing: 10,
+            children: [
+              _freeCourseCard('assets/images/winter_vacation_course.png'),
+              _freeCourseCard('assets/images/summer_courses.png')
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _freeCourseCard(String path) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: Adapt.px(5)),
+      width: Adapt.px(166),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(Adapt.px(6)),
+        ),
+      ),
+      child: Column(
+        children: [
+          Image.asset(path),
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                left: BorderSide(
+                  width: 1,
+                  color: Color(0xFFEBEBEB),
+                ),
+                right: BorderSide(
+                  width: 1,
+                  color: Color(0xFFEBEBEB),
+                ),
+                bottom: BorderSide(
+                  width: 1,
+                  color: Color(0xFFEBEBEB),
+                ),
+                top: BorderSide(
+                  width: 1,
+                  color: Color(0xFFEBEBEB),
+                ),
+              ),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(Adapt.px(6)),
+                bottomRight: Radius.circular(Adapt.px(6)),
+              ),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  '关注重点难点，提分更有效',
+                  style: TextStyle(
+                    color: Color(0xFF666666),
+                    fontSize: Adapt.px(12),
+                    height: 2,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: Adapt.px(9),
+                    left: Adapt.px(9),
+                    bottom: Adapt.px(9),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '限时免费',
+                        style: TextStyle(
+                          color: Color(0xFFFF5942),
+                          fontSize: Adapt.px(14),
+                        ),
+                      ),
+                      Text(
+                        '7,123人已学',
+                        style: TextStyle(
+                          color: Color(0xFF999999),
+                          fontSize: Adapt.px(12),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

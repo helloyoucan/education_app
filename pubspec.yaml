@@ -64,6 +64,8 @@ flutter:
      - assets/images/util_nav/util_nav_7.png
      - assets/images/util_nav/util_nav_8.png
      - assets/images/course_ad.png
+     - assets/images/summer_courses.png
+     - assets/images/winter_vacation_course.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

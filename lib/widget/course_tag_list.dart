@@ -12,6 +12,7 @@ class _CourseTagListState extends State<CourseTagList> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.centerLeft,
       child: Wrap(
         children: [
           _TagItem('语文'),

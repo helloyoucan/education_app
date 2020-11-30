@@ -8,6 +8,7 @@ class CommonCard extends StatelessWidget {
   final Widget titleEntry;
   final double circular;
   final bool hasBorder;
+  final Color color;
   const CommonCard(
       {Key key,
       this.child,
@@ -15,7 +16,8 @@ class CommonCard extends StatelessWidget {
       this.subTitle,
       this.titleEntry,
       this.circular = 0,
-      this.hasBorder = true})
+      this.hasBorder = true,
+      this.color = Colors.white})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class CommonCard extends StatelessWidget {
             Adapt.px(this.circular),
           ),
         ),
-        color: Colors.white,
+        color: color,
         border: Border.all(
           width: hasBorder ? 1 : 0,
           color: hasBorder ? Color(0xFFEBEBEB) : Colors.white,
