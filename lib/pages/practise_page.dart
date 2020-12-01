@@ -1,9 +1,11 @@
+import 'package:education_app/dao/practise_dao.dart';
+import 'package:education_app/model/practise_model.dart';
 import 'package:education_app/util/adapt_util.dart';
 import 'package:education_app/widget/course_tag_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-List<String> bookList = ['人教版  数学  四年级', '人教版  数学  四年级', '人教版  数学  四年级'];
+List<String> bookList = ['人教版  数学  四年级', '人教版  语文  四年级', '人教版  英语  四年级'];
 
 class PractisePage extends StatefulWidget {
   @override
@@ -15,10 +17,16 @@ class _PractisePageState extends State<PractisePage>
   TabController _tabController;
   int activeIndex = 0;
   String selectBook = bookList[0];
+  PractiseModel _practiseModel;
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(length: 2, vsync: this);
+    PractiseDao.fetch().then((value) {
+      setState(() {
+        _practiseModel = value;
+      });
+    });
   }
 
   @override
@@ -102,9 +110,10 @@ class _PractisePageState extends State<PractisePage>
             children: [
               CourseTagList(),
               _selectBook(context),
+              _bookListWidget,
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -116,25 +125,39 @@ class _PractisePageState extends State<PractisePage>
             context: context,
             backgroundColor: Colors.transparent,
             builder: (BuildContext context) {
-              return Container(
-                height: (MediaQuery.of(context).size.height) / 2,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(Adapt.px(6)),
-                    topRight: Radius.circular(Adapt.px(6)),
-                  ),
-                ),
-                child: ListView(
-                  children: [
-                    Card(
-                      child: ListTile(
-                        title: Text('One-line with both widgets'),
-                        trailing: Icon(Icons.more_vert),
+              return StatefulBuilder(
+                builder: (BuildContext context, StateSetter _setState) {
+                  return Container(
+                    padding: EdgeInsets.all(Adapt.px(10)),
+                    height: (MediaQuery.of(context).size.height) / 2,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(Adapt.px(6)),
+                        topRight: Radius.circular(Adapt.px(6)),
                       ),
                     ),
-                  ],
-                ),
+                    child: ListView(
+                      children: bookList.map((String item) {
+                        return RadioListTile(
+                          value: item,
+                          onChanged: (value) {
+                            _setState(() {
+                              selectBook = value;
+                            });
+                            setState(() {
+                              selectBook = value;
+                            });
+                            Navigator.of(context).pop();
+                          },
+                          groupValue: selectBook,
+                          title: Text(item),
+                          // selected: selectBook == item,
+                        );
+                      }).toList(),
+                    ),
+                  );
+                },
               );
             });
       },
@@ -167,5 +190,57 @@ class _PractisePageState extends State<PractisePage>
         ),
       ),
     );
+  }
+
+  Widget get _bookListWidget {
+    return _practiseModel == null
+        ? Container()
+        : Column(
+            children: _practiseModel.list.map((item) {
+              return Container(
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Text(item.section),
+                        Text(item.preview),
+                        item.correctQuestion > 0
+                            ? Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(item.correctQuestion.toString()),
+                                      Text('/' +
+                                          item.totalQuestion.toString() +
+                                          '  答题数/总题数'),
+                                    ],
+                                  ),
+                                  item.correctQuestion == item.totalQuestion
+                                      ? Container(
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.home),
+                                              Text('可真厉害，再接再厉吧^_^')
+                                            ],
+                                          ),
+                                        )
+                                      : Container(
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.home),
+                                              Text('成绩不太好，要继续努力鸭')
+                                            ],
+                                          ),
+                                        ),
+                                ],
+                              )
+                            : Text('暂未练习'),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          );
   }
 }
