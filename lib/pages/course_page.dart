@@ -30,35 +30,37 @@ class _CoursePageState extends State<CoursePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      backgroundColor: Color(0xFFF5F9FC),
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Color(0xFF02AEFB),
+        title: _courseNav,
+      ),
+      body: ListView(
         children: [
-          ListView(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: Adapt.px(44),
-                  left: Adapt.px(16),
-                  right: Adapt.px(16),
+          Padding(
+            padding: EdgeInsets.only(
+              // top: Adapt.px(44),
+              left: Adapt.px(16),
+              right: Adapt.px(16),
+            ),
+            child: Column(
+              children: [
+                CourseTagList(),
+                _ad,
+                Column(
+                  children: _courseListModel != null
+                      ? _courseListModel.list.map((item) {
+                          return _courseCard(item);
+                        }).toList()
+                      : [],
                 ),
-                child: Column(
-                  children: [
-                    CourseTagList(),
-                    _ad,
-                    Column(
-                      children: _courseListModel != null
-                          ? _courseListModel.list.map((item) {
-                              return _courseCard(item);
-                            }).toList()
-                          : [],
-                    ),
-                  ],
-                ),
-              ),
-              _freeCourse,
-              PageEnd(),
-            ],
+              ],
+            ),
           ),
-          _courseNav(context),
+          _freeCourse,
+          PageEnd(),
         ],
       ),
     );
@@ -169,60 +171,53 @@ class _CoursePageState extends State<CoursePage> {
   }
 
   /// 头部导航
-  Widget _courseNav(BuildContext context) {
-    double top = MediaQuery.of(context).padding.top;
-    return Container(
-      color: Color(0xFF02AEFB),
-      height: Adapt.px(44) + top,
-      padding:
-          EdgeInsets.only(top: top, left: Adapt.px(10), right: Adapt.px(10)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SelectGrade(),
-          Text(
-            '精品课',
-            style: TextStyle(
-              fontSize: Adapt.px(18),
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+  Widget get _courseNav {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        SelectGrade(),
+        Text(
+          '精品课',
+          style: TextStyle(
+            fontSize: Adapt.px(18),
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
-          Container(
-            child: Row(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '添加客服 ',
-                      style: TextStyle(
-                        fontSize: Adapt.px(12),
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        height: 1.1,
-                      ),
+        ),
+        Container(
+          child: Row(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '添加客服 ',
+                    style: TextStyle(
+                      fontSize: Adapt.px(12),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      height: 1.1,
                     ),
-                    Text(
-                      '领免费课 ',
-                      style: TextStyle(
-                        fontSize: Adapt.px(12),
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        height: 1.1,
-                      ),
+                  ),
+                  Text(
+                    '领免费课 ',
+                    style: TextStyle(
+                      fontSize: Adapt.px(12),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      height: 1.1,
                     ),
-                  ],
-                ),
-                Icon(
-                  Icons.support_agent,
-                  color: Colors.white,
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+                  ),
+                ],
+              ),
+              Icon(
+                Icons.support_agent,
+                color: Colors.white,
+              )
+            ],
+          ),
+        )
+      ],
     );
   }
 

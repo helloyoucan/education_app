@@ -11,26 +11,28 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: Stack(
-        children: <Widget>[
-          _listView(context),
-          HomeBar(),
-        ],
+      backgroundColor: Color(0xFFF5F9FC),
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Color(0xFF02AEFB),
+        title: HomeBar(),
       ),
+      body: _listView,
     );
   }
 
-  Widget _listView(BuildContext context) {
+  Widget get _listView {
     return ListView(
       scrollDirection: Axis.vertical,
       children: <Widget>[
         Stack(children: <Widget>[
           Container(
             color: Color(0xFF02AEFB),
-            height: Adapt.px(124),
+            height: Adapt.px(90),
             width: double.infinity,
           ),
-          _synchronizedCoachingCard(context)
+          _synchronizedCoachingCard
         ]),
         _swiperPromoteContent,
         _utilsNav,
@@ -304,17 +306,23 @@ class HomePage extends StatelessWidget {
   }
 
   /// 同步辅导的卡片
-  Widget _synchronizedCoachingCard(BuildContext context) {
+  Widget get _synchronizedCoachingCard {
     return Container(
-      margin: EdgeInsets.fromLTRB(Adapt.px(16),
-          MediaQuery.of(context).padding.top + Adapt.px(35), Adapt.px(16), 0),
+      margin: EdgeInsets.only(
+          left: Adapt.px(16),
+          // top: MediaQuery.of(context).padding.top + Adapt.px(35),
+          right: Adapt.px(16),
+          bottom: 0),
       child: CommonCard(
         title: '同步教辅',
         subTitle: '全科全面的学习工具',
         circular: 6,
         child: Container(
           padding: EdgeInsets.only(
-              left: Adapt.px(26), right: Adapt.px(26), bottom: Adapt.px(20)),
+            left: Adapt.px(26),
+            right: Adapt.px(26),
+            bottom: Adapt.px(20),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[

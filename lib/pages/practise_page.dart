@@ -24,14 +24,15 @@ class _PractisePageState extends State<PractisePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF5F9FC),
       appBar: AppBar(
-        toolbarHeight: Adapt.px(28 + 8 + 7),
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Color(0xFF02AEFB),
-        bottom: TabBar(
+        title: TabBar(
           controller: _tabController,
           isScrollable: true, // 是否可以滚动
-          indicatorWeight: Adapt.px(8),
+          indicatorWeight: 0.1,
           indicatorColor: Colors.transparent,
           labelPadding: EdgeInsets.all(0),
           onTap: (index) {
@@ -128,7 +129,6 @@ class _PractisePageState extends State<PractisePage>
                   children: [
                     Card(
                       child: ListTile(
-                        leading: FlutterLogo(),
                         title: Text('One-line with both widgets'),
                         trailing: Icon(Icons.more_vert),
                       ),
