@@ -1,5 +1,6 @@
 import 'package:education_app/pages/course_page.dart';
 import 'package:education_app/pages/home_page.dart';
+import 'package:education_app/pages/mine_page.dart';
 import 'package:education_app/pages/practise_page.dart';
 import 'package:education_app/util/iconFont.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,7 @@ class _TabNavigator extends State<TabNavigator> {
           HomePage(),
           CoursePage(),
           PractisePage(),
+          MinePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

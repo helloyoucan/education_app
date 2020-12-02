@@ -23,6 +23,11 @@ class _PractisePageState extends State<PractisePage>
   void initState() {
     super.initState();
     _tabController = new TabController(length: 2, vsync: this);
+    _tabController.addListener(() {
+      setState(() {
+        activeIndex = _tabController.index;
+      });
+    });
     PractiseDao.fetch().then((value) {
       setState(() {
         _practiseModel = value;
@@ -353,62 +358,109 @@ class _PractisePageState extends State<PractisePage>
     return Container(
       child: ListView(
         children: [
-          CourseTagList(),
           Container(
-              margin: EdgeInsets.only(
-                top: Adapt.px(10),
-                left: Adapt.px(26),
-                right: Adapt.px(26),
-              ),
-              padding: EdgeInsets.only(
-                top: Adapt.px(20),
-                left: Adapt.px(24),
-                right: Adapt.px(25),
-                bottom: Adapt.px(14),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(Adapt.px(6))),
-                border: Border.all(width: 1, color: Color(0xFFEBEBEB)),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    "在18+ (18x20-25) ÷25中，最后一步求()",
-                    style: TextStyle(
-                      height: 1.8,
-                      letterSpacing: Adapt.px(1),
-                      fontSize: Adapt.px(16),
-                      color: Color(0xFF333333),
-                    ),
+            margin: EdgeInsets.only(left: Adapt.px(16), right: Adapt.px(16)),
+            child: CourseTagList(),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              top: Adapt.px(10),
+              left: Adapt.px(26),
+              right: Adapt.px(26),
+              bottom: Adapt.px(10),
+            ),
+            padding: EdgeInsets.only(
+              top: Adapt.px(20),
+              left: Adapt.px(24),
+              right: Adapt.px(24),
+              bottom: Adapt.px(24),
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(Adapt.px(6))),
+              border: Border.all(width: 1, color: Color(0xFFEBEBEB)),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  "在18+ (18x20-25) ÷25中，最后一步求()",
+                  style: TextStyle(
+                    height: 1.8,
+                    letterSpacing: Adapt.px(1),
+                    fontSize: Adapt.px(16),
+                    color: Color(0xFF333333),
                   ),
-                  _answerOption('A', '商'),
-                  _answerOption('B', '和'),
-                  _answerOption('C', '积'),
-                ],
-              )),
+                ),
+                _answerOption('A', '商'),
+                _answerOption('B', '和'),
+                _answerOption('C', '积'),
+              ],
+            ),
+          ),
+          PageEnd(text: '别气馁~，加油复习吧'),
+          Container(
+            margin: EdgeInsets.only(left: Adapt.px(22), right: Adapt.px(22)),
+            height: Adapt.px(50),
+            child: RaisedButton(
+              onPressed: () {},
+              color: Color(0xFF03AEFB),
+              shape: StadiumBorder(),
+              child: Text(
+                '错题重做',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Adapt.px(16),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 
+  // 错题
   Widget _answerOption(String index, String text) {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(Adapt.px(6))),
-        border: Border.all(
-          width: 1,
-          color: Color(0xFFB5E8FF),
-        ),
+      height: Adapt.px(50),
+      margin: EdgeInsets.only(
+        top: Adapt.px(10),
       ),
-      child: Row(
-        children: [
-          Text(index),
-          Container(
-            child: Text(text),
-          ),
-        ],
+      child: OutlineButton(
+        padding: EdgeInsets.all(0),
+        borderSide: BorderSide(color: Color(0xFFB5E8FF)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6),
+        ),
+        onPressed: () {},
+        child: Row(
+          children: [
+            Container(
+              width: Adapt.px(40),
+              alignment: Alignment.center,
+              child: Text(
+                index,
+                style: TextStyle(
+                  color: Color(0xFF02AEFB),
+                  fontSize: Adapt.px(20),
+                ),
+              ),
+            ),
+            Container(
+              height: Adapt.px(20),
+              margin: EdgeInsets.only(right: Adapt.px(10)),
+              decoration: BoxDecoration(
+                border: Border(
+                  right: BorderSide(
+                    width: Adapt.px(1),
+                    color: Color(0xFFEFEFEF),
+                  ),
+                ),
+              ),
+            ),
+            Text(text),
+          ],
+        ),
       ),
     );
   }
