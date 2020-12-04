@@ -1,5 +1,5 @@
 import 'package:education_app/util/adapt_util.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:education_app/widget/page_end.dart';
 import 'package:flutter/material.dart';
 
 class MinePage extends StatelessWidget {
@@ -11,6 +11,7 @@ class MinePage extends StatelessWidget {
           _accountInfo(context),
           _commonEntry,
           _entryList,
+          PageEnd(),
         ],
       ),
     );
@@ -20,7 +21,7 @@ class MinePage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       color: Color(0xFF02AEFB),
-      height: Adapt.px(176),
+      height: Adapt.px(166),
       width: double.infinity,
       child: Stack(
         children: [
@@ -30,7 +31,7 @@ class MinePage extends StatelessWidget {
             child: IconButton(
               onPressed: () {},
               color: Colors.white,
-              icon: Icon(Icons.edit),
+              icon: Icon(Icons.border_color),
               iconSize: Adapt.px(18),
             ),
           ),
@@ -218,25 +219,30 @@ class MinePage extends StatelessWidget {
             topRight: Radius.circular(Adapt.px(6)),
           ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: GridView.count(
+          crossAxisCount: 3,
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   child: Icon(
-                    Icons.pages,
+                    Icons.description,
                     size: Adapt.px(28),
                     color: Color(0xFFBEA0FE),
                   ),
                 ),
-                Text(
-                  "我的订单",
-                  style: TextStyle(
-                    fontSize: Adapt.px(14),
-                    color: Color(0xFF666666),
-                    fontWeight: FontWeight.bold,
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: Adapt.px(12),
+                    bottom: Adapt.px(4),
+                  ),
+                  child: Text(
+                    "我的订单",
+                    style: TextStyle(
+                      fontSize: Adapt.px(14),
+                      color: Color(0xFF666666),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Text(
@@ -249,21 +255,26 @@ class MinePage extends StatelessWidget {
               ],
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   child: Icon(
-                    Icons.pages,
+                    Icons.turned_in,
                     size: Adapt.px(28),
-                    color: Color(0xFFBEA0FE),
+                    color: Color(0xFFFF632B),
                   ),
                 ),
-                Text(
-                  "我的收藏",
-                  style: TextStyle(
-                    fontSize: Adapt.px(14),
-                    color: Color(0xFF666666),
-                    fontWeight: FontWeight.bold,
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: Adapt.px(12),
+                    bottom: Adapt.px(4),
+                  ),
+                  child: Text(
+                    "我的收藏",
+                    style: TextStyle(
+                      fontSize: Adapt.px(14),
+                      color: Color(0xFF666666),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Text(
@@ -276,21 +287,26 @@ class MinePage extends StatelessWidget {
               ],
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   child: Icon(
-                    Icons.pages,
+                    Icons.assistant_photo,
                     size: Adapt.px(28),
-                    color: Color(0xFFBEA0FE),
+                    color: Color(0xFF06C76E),
                   ),
                 ),
-                Text(
-                  "我的活动",
-                  style: TextStyle(
-                    fontSize: Adapt.px(14),
-                    color: Color(0xFF666666),
-                    fontWeight: FontWeight.bold,
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: Adapt.px(12),
+                    bottom: Adapt.px(4),
+                  ),
+                  child: Text(
+                    "我的活动",
+                    style: TextStyle(
+                      fontSize: Adapt.px(14),
+                      color: Color(0xFF666666),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Text(
@@ -312,49 +328,60 @@ class MinePage extends StatelessWidget {
     return Container(
       color: Colors.white,
       margin: EdgeInsets.only(top: Adapt.px(10)),
-      padding: EdgeInsets.only(left: Adapt.px(16), right: Adapt.px(16)),
       child: Column(
         children: [
           entryItem(
-            icon: Icons.home,
+            icon: Icons.notifications,
             iconColor: Color(0xFF02C2FF),
             title: '消息中心',
           ),
           entryItem(
-            icon: Icons.home,
-            iconColor: Color(0xFF02C2FF),
+            icon: Icons.settings,
+            iconColor: Color(0xFFBEA0FE),
             title: '设置',
           ),
           entryItem(
-            icon: Icons.home,
-            iconColor: Color(0xFF02C2FF),
+            icon: Icons.person,
+            iconColor: Color(0xFFFEBC30),
             title: '客服小姐姐',
           ),
           entryItem(
-            icon: Icons.home,
-            iconColor: Color(0xFF02C2FF),
+            icon: Icons.thumb_up,
+            iconColor: Color(0xFFFF632B),
             title: '赏个好评',
             subTitle: '卖萌求鼓励^_^',
           ),
           entryItem(
-            icon: Icons.home,
-            iconColor: Color(0xFF02C2FF),
-            title: '消息中心',
-          ),
+              icon: Icons.info,
+              iconColor: Color(0xFF4CA0FE),
+              title: '探索小学通',
+              isLast: true),
         ],
       ),
     );
   }
 
   Widget entryItem(
-      {IconData icon, Color iconColor, String title, String subTitle = ''}) {
+      {IconData icon,
+      Color iconColor,
+      String title,
+      String subTitle = '',
+      bool isLast = false}) {
     return Container(
       height: Adapt.px(50),
+      padding: EdgeInsets.only(left: Adapt.px(16), right: Adapt.px(16)),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: isLast
+              ? BorderSide.none
+              : BorderSide(width: Adapt.px(1), color: Color(0x33C7C7C7)),
+        ),
+      ),
       child: Row(
         children: [
-          Icon(icon, size: 21, color: iconColor),
+          Icon(icon, size: Adapt.px(21), color: iconColor),
           Text(
-            title,
+            '  $title',
             style: TextStyle(
               color: Color(0xFF666666),
               fontSize: Adapt.px(14),
@@ -373,7 +400,8 @@ class MinePage extends StatelessWidget {
                     ),
                   ),
                   Icon(
-                    Icons.rotate_right,
+                    Icons.keyboard_arrow_right,
+                    size: Adapt.px(24),
                     color: Color(0xFFBABABA),
                   ),
                 ],
