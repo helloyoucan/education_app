@@ -207,119 +207,92 @@ class MinePage extends StatelessWidget {
 
   Widget get _commonEntry {
     return Container(
-      height: Adapt.px(115),
       decoration: BoxDecoration(
         color: Color(0xFF02AEFB),
       ),
-      child: Container(
-        decoration: BoxDecoration(
+      child: PhysicalModel(
+        color: Colors.transparent,
+        clipBehavior: Clip.antiAlias,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(Adapt.px(6)),
+          topRight: Radius.circular(Adapt.px(6)),
+        ),
+        child: Container(
+          height: Adapt.px(115),
           color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(Adapt.px(6)),
-            topRight: Radius.circular(Adapt.px(6)),
+          child: GridView.count(
+            crossAxisCount: 3,
+            children: [
+              _commonEntryItem(
+                icon: Icons.description,
+                iconColor: Color(0xFFBEA0FE),
+                text: "我的订单",
+                description: "查看购课订单",
+              ),
+              _commonEntryItem(
+                icon: Icons.turned_in,
+                iconColor: Color(0xFFFF632B),
+                text: "我的收藏",
+                description: "收藏的题都在这呦",
+              ),
+              _commonEntryItem(
+                icon: Icons.assistant_photo,
+                iconColor: Color(0xFF06C76E),
+                text: "我的活动",
+                description: "我参与的专题活动",
+              ),
+            ],
           ),
         ),
-        child: GridView.count(
-          crossAxisCount: 3,
-          children: [
-            Column(
-              children: [
-                Container(
-                  child: Icon(
-                    Icons.description,
-                    size: Adapt.px(28),
-                    color: Color(0xFFBEA0FE),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: Adapt.px(12),
-                    bottom: Adapt.px(4),
-                  ),
-                  child: Text(
-                    "我的订单",
-                    style: TextStyle(
-                      fontSize: Adapt.px(14),
-                      color: Color(0xFF666666),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Text(
-                  "查看购课订单",
-                  style: TextStyle(
-                    fontSize: Adapt.px(12),
-                    color: Color(0xFF999999),
-                  ),
-                )
-              ],
+      ),
+    );
+  }
+
+  Widget _commonEntryItem({
+    IconData icon,
+    Color iconColor,
+    String text,
+    String description,
+  }) {
+    return OutlineButton(
+      onPressed: () {},
+      padding: EdgeInsets.all(0),
+      borderSide: BorderSide(color: Colors.transparent),
+      highlightedBorderColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0),
+      ),
+      child: Column(
+        children: [
+          Container(
+            child: Icon(
+              icon,
+              size: Adapt.px(28),
+              color: iconColor,
             ),
-            Column(
-              children: [
-                Container(
-                  child: Icon(
-                    Icons.turned_in,
-                    size: Adapt.px(28),
-                    color: Color(0xFFFF632B),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: Adapt.px(12),
-                    bottom: Adapt.px(4),
-                  ),
-                  child: Text(
-                    "我的收藏",
-                    style: TextStyle(
-                      fontSize: Adapt.px(14),
-                      color: Color(0xFF666666),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Text(
-                  "收藏的题都在这呦",
-                  style: TextStyle(
-                    fontSize: Adapt.px(12),
-                    color: Color(0xFF999999),
-                  ),
-                )
-              ],
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: Adapt.px(12),
+              bottom: Adapt.px(4),
             ),
-            Column(
-              children: [
-                Container(
-                  child: Icon(
-                    Icons.assistant_photo,
-                    size: Adapt.px(28),
-                    color: Color(0xFF06C76E),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: Adapt.px(12),
-                    bottom: Adapt.px(4),
-                  ),
-                  child: Text(
-                    "我的活动",
-                    style: TextStyle(
-                      fontSize: Adapt.px(14),
-                      color: Color(0xFF666666),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Text(
-                  "我参与的专题活动",
-                  style: TextStyle(
-                    fontSize: Adapt.px(12),
-                    color: Color(0xFF999999),
-                  ),
-                )
-              ],
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: Adapt.px(14),
+                color: Color(0xFF666666),
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ],
-        ),
+          ),
+          Text(
+            description,
+            style: TextStyle(
+              fontSize: Adapt.px(12),
+              color: Color(0xFF999999),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -367,48 +340,57 @@ class MinePage extends StatelessWidget {
       String title,
       String subTitle = '',
       bool isLast = false}) {
-    return Container(
-      height: Adapt.px(50),
-      padding: EdgeInsets.only(left: Adapt.px(16), right: Adapt.px(16)),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: isLast
-              ? BorderSide.none
-              : BorderSide(width: Adapt.px(1), color: Color(0x33C7C7C7)),
-        ),
+    return OutlineButton(
+      onPressed: () {},
+      padding: EdgeInsets.all(0),
+      borderSide: BorderSide(color: Colors.transparent),
+      highlightedBorderColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0),
       ),
-      child: Row(
-        children: [
-          Icon(icon, size: Adapt.px(21), color: iconColor),
-          Text(
-            '  $title',
-            style: TextStyle(
-              color: Color(0xFF666666),
-              fontSize: Adapt.px(14),
-            ),
+      child: Container(
+        height: Adapt.px(50),
+        padding: EdgeInsets.only(left: Adapt.px(16), right: Adapt.px(16)),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: isLast
+                ? BorderSide.none
+                : BorderSide(width: Adapt.px(1), color: Color(0x33C7C7C7)),
           ),
-          Expanded(
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    subTitle,
-                    style: TextStyle(
-                      color: Color(0xFFC7C7C7),
-                      fontSize: Adapt.px(12),
-                    ),
-                  ),
-                  Icon(
-                    Icons.keyboard_arrow_right,
-                    size: Adapt.px(24),
-                    color: Color(0xFFBABABA),
-                  ),
-                ],
+        ),
+        child: Row(
+          children: [
+            Icon(icon, size: Adapt.px(21), color: iconColor),
+            Text(
+              '  $title',
+              style: TextStyle(
+                color: Color(0xFF666666),
+                fontSize: Adapt.px(14),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      subTitle,
+                      style: TextStyle(
+                        color: Color(0xFFC7C7C7),
+                        fontSize: Adapt.px(12),
+                      ),
+                    ),
+                    Icon(
+                      Icons.keyboard_arrow_right,
+                      size: Adapt.px(24),
+                      color: Color(0xFFBABABA),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
