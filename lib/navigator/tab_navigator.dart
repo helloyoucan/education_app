@@ -2,6 +2,7 @@ import 'package:education_app/pages/course_page.dart';
 import 'package:education_app/pages/home_page.dart';
 import 'package:education_app/pages/mine_page.dart';
 import 'package:education_app/pages/practise_page.dart';
+import 'package:education_app/util/adapt_util.dart';
 import 'package:education_app/util/iconFont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +29,9 @@ class _TabNavigator extends State<TabNavigator> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        iconSize: 26,
-        unselectedFontSize: 18,
-        selectedFontSize: 18,
+        iconSize: Adapt.px(20),
+        unselectedFontSize: Adapt.px(14),
+        selectedFontSize: Adapt.px(14),
         currentIndex: _currentIndex,
         onTap: (index) {
           _controller.jumpToPage(index);

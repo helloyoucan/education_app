@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:education_app/navigator/tab_navigator.dart';
 import 'package:education_app/util/adapt_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,96 +15,99 @@ class _GuidePageState extends State {
   int activeIndex = 0;
   Widget guideItem(
       {String title, String subTitle, String bgPath, bool isLast = false}) {
-    return Container(
-      child: Expanded(
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: Adapt.px(361),
-              color: Color(0xFFF6F7FF),
-              alignment: Alignment.bottomCenter,
-              child: Image.asset(
-                bgPath,
-                width: Adapt.px(218),
-                height: Adapt.px(300),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.white,
-                width: double.infinity,
-                child: Stack(
-                  alignment: Alignment.center,
+    return Column(
+      children: <Widget>[
+        Container(
+          height: Adapt.px(361),
+          color: Color(0xFFF6F7FF),
+          alignment: Alignment.bottomCenter,
+          child: Image.asset(
+            bgPath,
+            width: Adapt.px(218),
+            height: Adapt.px(300),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.white,
+            width: double.infinity,
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Column(
                   children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 62, 0, 3),
-                          child: Text(
-                            title,
-                            strutStyle: StrutStyle(height: Adapt.px(4)),
-                            style: TextStyle(
-                                color: Color(0xFF333333),
-                                fontSize: Adapt.px(24),
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Text(
-                          subTitle,
-                          style: TextStyle(
-                            color: Color(0xFF999999),
-                            fontSize: Adapt.px(14),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 62, 0, 3),
+                      child: Text(
+                        title,
+                        strutStyle: StrutStyle(height: Adapt.px(4)),
+                        style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: Adapt.px(24),
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                    isLast
-                        ? Positioned(
-                            child: Image.asset(
-                              'assets/images/read_book_icon.png',
-                              width: Adapt.px(44),
-                              height: Adapt.px(44),
-                            ),
-                            bottom: Adapt.px(73),
-                          )
-                        : Container(height: 0.0, width: 0.0),
-                    isLast
-                        ? Positioned(
-                            child: RaisedButton(
-                              shape: const RoundedRectangleBorder(
-                                side: BorderSide.none,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(100),
-                                ),
-                              ),
-                              color: Color(0xFF03AEFB),
-                              onPressed: () {},
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: Adapt.px(330),
-                                height: Adapt.px(50),
-                                child: Text(
-                                  '开启学习之旅',
-                                  style: TextStyle(
-                                    fontSize: Adapt.px(18),
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            bottom: Adapt.px(33),
-                          )
-                        : Container(height: 0.0, width: 0.0)
+                    Text(
+                      subTitle,
+                      style: TextStyle(
+                        color: Color(0xFF999999),
+                        fontSize: Adapt.px(14),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
-              ),
+                isLast
+                    ? Positioned(
+                        child: Image.asset(
+                          'assets/images/read_book_icon.png',
+                          width: Adapt.px(44),
+                          height: Adapt.px(44),
+                        ),
+                        bottom: Adapt.px(73),
+                      )
+                    : Container(height: 0.0, width: 0.0),
+                isLast
+                    ? Positioned(
+                        child: RaisedButton(
+                          shape: const RoundedRectangleBorder(
+                            side: BorderSide.none,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(100),
+                            ),
+                          ),
+                          color: Color(0xFF03AEFB),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TabNavigator(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: Adapt.px(330),
+                            height: Adapt.px(50),
+                            child: Text(
+                              '开启学习之旅',
+                              style: TextStyle(
+                                fontSize: Adapt.px(18),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        bottom: Adapt.px(33),
+                      )
+                    : Container(height: 0.0, width: 0.0)
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 

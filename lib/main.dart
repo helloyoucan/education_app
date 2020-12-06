@@ -1,4 +1,3 @@
-import 'package:education_app/navigator/tab_navigator.dart';
 import 'package:education_app/pages/guide_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +10,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '小学教育',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // home: GuidePage(),
-      home: TabNavigator(),
+      home: GuidePage(),
     );
   }
 }

@@ -21,12 +21,12 @@ class MinePage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       color: Color(0xFF02AEFB),
-      height: Adapt.px(166),
+      height: Adapt.px(176),
       width: double.infinity,
       child: Stack(
         children: [
           Positioned(
-            top: Adapt.px(7),
+            top: Adapt.px(0),
             right: Adapt.px(18),
             child: IconButton(
               onPressed: () {},
@@ -221,6 +221,7 @@ class MinePage extends StatelessWidget {
           height: Adapt.px(115),
           color: Colors.white,
           child: GridView.count(
+            padding: EdgeInsets.all(0),
             crossAxisCount: 3,
             children: [
               _commonEntryItem(
@@ -255,6 +256,7 @@ class MinePage extends StatelessWidget {
     String description,
   }) {
     return OutlineButton(
+      color: Colors.black,
       onPressed: () {},
       padding: EdgeInsets.all(0),
       borderSide: BorderSide(color: Colors.transparent),
@@ -263,6 +265,7 @@ class MinePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(0),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             child: Icon(

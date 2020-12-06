@@ -1,4 +1,6 @@
+import 'package:education_app/pages/search_page.dart';
 import 'package:education_app/util/adapt_util.dart';
+import 'package:education_app/util/navigator_util.dart';
 import 'package:education_app/widget/select_grade.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +12,9 @@ class HomeBar extends StatelessWidget {
         SelectGrade(),
         Expanded(
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              NavigatorUtil.push(context, SearchPage());
+            },
             child: Container(
               alignment: Alignment.centerRight,
               margin: EdgeInsets.only(left: Adapt.px(14)),

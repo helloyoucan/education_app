@@ -50,6 +50,7 @@ flutter:
      - assets/images/guide_bg_1.png
      - assets/images/guide_bg_2.png
      - assets/images/guide_bg_3.png
+     - assets/images/read_book_icon.png
      - assets/images/head_icon.png
      - assets/images/chinese.png
      - assets/images/math.png
