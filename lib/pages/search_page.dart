@@ -154,9 +154,45 @@ class _SearchPage extends State<SearchPage> {
           ),
         ),
         Wrap(
-          children: [],
+          children: [
+            _tag('人类科幻2000年'),
+            _tag('精讲“太空漫游”四部曲'),
+            _tag('国学经典'),
+            _tag('国学经典'),
+          ],
         )
       ],
+    );
+  }
+
+  Widget _tag(String text, {bool isHot}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Color(0xFFEFF4F7),
+        border: Border.all(
+          width: Adapt.px(1),
+          color: Color(0xFFE0EAF1),
+        ),
+        borderRadius: BorderRadius.circular(Adapt.px(14)),
+      ),
+      margin: EdgeInsets.only(
+        right: Adapt.px(10),
+        bottom: Adapt.px(10),
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: Adapt.px(8),
+        vertical: Adapt.px(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+                fontSize: Adapt.px(12), color: Color(0xFF666666), height: 1),
+          ),
+        ],
+      ),
     );
   }
 }
