@@ -1,4 +1,5 @@
 import 'package:education_app/util/adapt_util.dart';
+import 'package:education_app/util/iconFont.dart';
 import 'package:education_app/widget/page_end.dart';
 import 'package:flutter/material.dart';
 
@@ -76,7 +77,7 @@ class MinePage extends StatelessWidget {
                           ),
                         ),
                         Icon(
-                          Icons.home,
+                          IconData(IconFont.male, fontFamily: 'iconfont'),
                           size: Adapt.px(18),
                           color: Colors.white,
                         )

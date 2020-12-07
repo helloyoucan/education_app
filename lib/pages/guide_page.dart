@@ -1,17 +1,19 @@
 import 'dart:ui';
 
-import 'package:education_app/navigator/tab_navigator.dart';
 import 'package:education_app/util/adapt_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class GuidePage extends StatefulWidget {
+  final VoidCallback goFn;
+
+  const GuidePage({Key key, this.goFn}) : super(key: key);
   @override
   _GuidePageState createState() => _GuidePageState();
 }
 
-class _GuidePageState extends State {
+class _GuidePageState extends State<GuidePage> {
   int activeIndex = 0;
   Widget guideItem(
       {String title, String subTitle, String bgPath, bool isLast = false}) {
@@ -79,12 +81,7 @@ class _GuidePageState extends State {
                           ),
                           color: Color(0xFF03AEFB),
                           onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TabNavigator(),
-                              ),
-                            );
+                            widget.goFn();
                           },
                           child: Container(
                             alignment: Alignment.center,
