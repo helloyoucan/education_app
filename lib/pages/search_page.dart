@@ -85,30 +85,28 @@ class _SearchPage extends State<SearchPage> {
           ),
         ),
         Container(
+          width: Adapt.px(60),
+          height: Adapt.px(28),
           margin: EdgeInsets.only(
             left: Adapt.px(12),
             right: Adapt.px(16),
           ),
           child: RaisedButton(
-            padding: EdgeInsets.all(0),
+            padding: EdgeInsets.only(bottom: 1),
             elevation: 0,
             onPressed: () {
               print(_textEditingController.text);
             },
-            color: Color(0xFFCFF3FF),
+            color: Colors.white,
+            // color: Color(0xFFCFF3FF),
             highlightColor: Color(0xFFCFF3FF),
             highlightElevation: 0,
             shape: StadiumBorder(),
-            child: Container(
-              alignment: Alignment.center,
-              // width: Adapt.px(60),
-              height: Adapt.px(30),
-              child: Text(
-                '搜索',
-                style: TextStyle(
-                  color: Color(0xFF02AEFB),
-                  fontSize: Adapt.px(14),
-                ),
+            child: Text(
+              '搜索',
+              style: TextStyle(
+                color: Color(0xFF02AEFB),
+                fontSize: Adapt.px(14),
               ),
             ),
           ),
@@ -121,51 +119,58 @@ class _SearchPage extends State<SearchPage> {
     return Column(
       children: [
         _searchHistory,
+        _realTimeHotSearch,
       ],
     );
   }
 
   Widget get _searchHistory {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _title('搜索历史', canDelete: true),
         Padding(
-          padding: EdgeInsets.all(Adapt.px(15)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          padding: EdgeInsets.only(
+            left: Adapt.px(15),
+            right: Adapt.px(5),
+          ),
+          child: Wrap(
             children: [
-              Text(
-                '搜索历史',
-                style: TextStyle(
-                  color: Color(0xFF333333),
-                  fontSize: Adapt.px(14),
-                  height: 1,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Icon(
-                  Icons.delete_forever,
-                  size: Adapt.px(20),
-                  color: Color(0xFFD6D6D6),
-                ),
-              )
+              _tag('人类科幻2000年'),
+              _tag('精讲“太空漫游”四部曲'),
+              _tag('国学经典'),
             ],
           ),
         ),
-        Wrap(
-          children: [
-            _tag('人类科幻2000年'),
-            _tag('精讲“太空漫游”四部曲'),
-            _tag('国学经典'),
-            _tag('国学经典'),
-          ],
-        )
       ],
     );
   }
 
-  Widget _tag(String text, {bool isHot}) {
+  Widget get _realTimeHotSearch {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _title('实时热搜', canDelete: true),
+        Padding(
+          padding: EdgeInsets.only(
+            left: Adapt.px(15),
+            right: Adapt.px(5),
+          ),
+          child: Wrap(
+            children: [
+              _tag('四年级数学提升课', isHot: true),
+              _tag('精讲“太空漫游”四部曲'),
+              _tag('名著解读'),
+              _tag('恐龙拯救地球'),
+              _tag('恐龙拯救地球'),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _tag(String text, {bool isHot = false}) {
     return Container(
       decoration: BoxDecoration(
         color: Color(0xFFEFF4F7),
@@ -173,7 +178,7 @@ class _SearchPage extends State<SearchPage> {
           width: Adapt.px(1),
           color: Color(0xFFE0EAF1),
         ),
-        borderRadius: BorderRadius.circular(Adapt.px(14)),
+        borderRadius: BorderRadius.circular(Adapt.px(28)),
       ),
       margin: EdgeInsets.only(
         right: Adapt.px(10),
@@ -181,16 +186,56 @@ class _SearchPage extends State<SearchPage> {
       ),
       padding: EdgeInsets.symmetric(
         horizontal: Adapt.px(8),
-        vertical: Adapt.px(8),
+        vertical: Adapt.px(4),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
+          isHot
+              ? Icon(
+                  Icons.whatshot,
+                  color: Color(0xFFFE5434),
+                  size: Adapt.px(17),
+                )
+              : Text(''),
           Text(
-            text,
+            '  $text',
             style: TextStyle(
                 fontSize: Adapt.px(12), color: Color(0xFF666666), height: 1),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _title(String text, {bool canDelete = false}) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: Adapt.px(15),
+        right: Adapt.px(15),
+        top: Adapt.px(15),
+        bottom: Adapt.px(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              color: Color(0xFF333333),
+              fontSize: Adapt.px(14),
+              height: 1,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: Icon(
+              Icons.delete_forever,
+              size: Adapt.px(20),
+              color: Color(0xFFD6D6D6),
+            ),
+          )
         ],
       ),
     );
