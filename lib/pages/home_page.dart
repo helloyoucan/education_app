@@ -7,7 +7,14 @@ import 'package:education_app/widget/page_end.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {}
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -18,8 +25,16 @@ class HomePage extends StatelessWidget {
         backgroundColor: Color(0xFF02AEFB),
         title: HomeBar(),
       ),
-      body: _listView,
+      body: RefreshIndicator(
+        onRefresh: _handleRefresh,
+        child: _listView,
+      ),
     );
+  }
+
+  Future<Null> _handleRefresh() async {
+    await Future.delayed(Duration(seconds: 2));
+    return null;
   }
 
   Widget get _listView {
